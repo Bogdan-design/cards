@@ -1,10 +1,11 @@
 import React from 'react';
 
-export const SignIn = () => {
+export const Learn = () => {
     return (
         <div>
-Sign In
+            Learn
         </div>
     );
 };
 
+    

@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const SignIn = () => {
+export const Cards = () => {
     return (
         <div>
-Sign In
+            Cards
         </div>
     );
 };

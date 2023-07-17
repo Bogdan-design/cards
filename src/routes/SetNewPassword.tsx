@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const SignIn = () => {
+export const SetNewPassword = () => {
     return (
         <div>
-Sign In
+            set-new-password
         </div>
     );
 };

@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const SignIn = () => {
+export const CheckEmail = () => {
     return (
         <div>
-Sign In
+            check-email
         </div>
     );
 };
