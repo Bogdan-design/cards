@@ -3,6 +3,7 @@ import {useAppDispatch, useAppSelector} from "app/hooks";
 import {useEffect} from "react";
 import React from "react";
 import {appActions} from "app/app.slice";
+import {Register} from "register/Register";
 
 function App() {
   const isLoading = useAppSelector((state) => state.app.isLoading);
@@ -18,6 +19,7 @@ function App() {
   return (
       <div className="App">
         {isLoading && <h1>Loader...</h1>}
+        <Register/>
         <Counter />
       </div>
   );
