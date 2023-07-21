@@ -2,7 +2,7 @@ import React from "react";
 import {createRoot} from "react-dom/client";
 import {Provider} from "react-redux";
 import {store} from "app/store";
-import App from "./App";
+import {App} from "App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
@@ -16,6 +16,7 @@ import {Packs} from "routes/Packs";
 import {ForgotPassword} from "routes/ForgotPassword";
 import {CheckEmail} from "routes/CheckEmail";
 import {SetNewPassword} from "routes/SetNewPassword";
+import ButtonAppBar from "components/ButtonAppBar";
 
 const router = createBrowserRouter([
     {
@@ -76,6 +77,7 @@ const root = createRoot(container);
 
 root.render(
     <React.StrictMode>
+        <ButtonAppBar/>
         <RouterProvider router={router}/>
         <Provider store={store}>
             <App/>
