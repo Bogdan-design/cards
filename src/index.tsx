@@ -17,11 +17,17 @@ import {ForgotPassword} from "routes/ForgotPassword";
 import {CheckEmail} from "routes/CheckEmail";
 import {SetNewPassword} from "routes/SetNewPassword";
 import ButtonAppBar from "components/ButtonAppBar";
+import { Login } from "login/Login";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Root/>,
+        errorElement: "Error"
+    },
+    {
+        path: "login",
+        element: <Login/>,
         errorElement: "Error"
     },
     {
@@ -76,13 +82,10 @@ const container = document.getElementById("root")!;
 const root = createRoot(container);
 
 root.render(
-    <React.StrictMode>
-        <ButtonAppBar/>
-        <RouterProvider router={router}/>
         <Provider store={store}>
+            {/*<RouterProvider router={router}/>*/}
             <App/>
         </Provider>
-    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
