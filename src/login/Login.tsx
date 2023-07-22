@@ -52,6 +52,8 @@ import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Paper, TextFi
 import { useActions } from "common/hooks/useAppActions";
 import { authThunks } from "features/auth/auth.slice";
 import Button from "@mui/material/Button";
+import { LinkTo, TextForm } from "register/Register";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -60,6 +62,7 @@ import Button from "@mui/material/Button";
 export const Login = () => {
 
   const { login } = useActions(authThunks);
+  const navigate = useNavigate()
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
@@ -125,6 +128,10 @@ export const Login = () => {
                     color={'secondary'}>
               Sing In
             </Button>
+           <TextForm>
+             Forgot Password?
+           </TextForm>
+            <LinkTo onClick={()=>navigate('/login')}>Sing IN</LinkTo>
           </FormGroup>
         </FormControl>
       </form>

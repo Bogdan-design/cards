@@ -81,7 +81,7 @@ export const Register = () => {
               Sing Up
             </Button>
             <TextForm>Already have an account?</TextForm>
-            <LinkTo>Sing IN</LinkTo>
+            <LinkTo onClick={()=>navigate('/login')}>Sing In</LinkTo>
           </FormGroup>
         </FormControl>
       </form>
@@ -89,7 +89,7 @@ export const Register = () => {
   </Paper>;
 };
 
-const LinkTo = styled.a`
+export const LinkTo = styled.a`
   color: var(--primary-500, #8C61FF);
   display: flex;
   justify-content: center;
@@ -101,7 +101,7 @@ const LinkTo = styled.a`
   text-decoration-line: underline;
 `
 
-const TextForm = styled.h3`
+export const TextForm = styled.h3`
   color:#C3C1C7;
   text-align: center; 
   font-size: 14px;
