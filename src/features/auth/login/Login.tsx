@@ -53,8 +53,10 @@ import { useActions } from "common/hooks/useAppActions";
 import { authThunks } from "features/auth/auth.slice";
 import Button from "@mui/material/Button";
 import { LinkTo, TextForm } from "features/auth/register/Register";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { emailValidation } from "features/auth/login/validation";
+import { useAppSelector } from "app/hooks";
+import { selectIsSignIn } from "app/app.selectors";
 
 
 
@@ -63,13 +65,14 @@ import { emailValidation } from "features/auth/login/validation";
 export const Login = () => {
 
   const { login } = useActions(authThunks);
+  const isSignIn=useAppSelector(selectIsSignIn)
+
   const navigate = useNavigate()
 
   const {
     control,
-    register,
     handleSubmit,
-    formState: {errors, isValid}
+    formState: {errors}
   } = useForm({
     defaultValues: {
       firstName:"",
@@ -84,6 +87,9 @@ export const Login = () => {
     login(data)
   };
 
+  if(isSignIn) {
+    return <Navigate to={"/login"} />
+  }
 
   return <Paper elevation={3} sx={{
     display: "flex",

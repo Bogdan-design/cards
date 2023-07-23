@@ -45,7 +45,7 @@ const slice = createSlice({
       state.isSignIn = action.payload.isSignIn
     })
       }
-});
+}); 
 
 export const authReducer = slice.reducer;
 export const authActions = slice.actions;

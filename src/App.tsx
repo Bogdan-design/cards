@@ -3,28 +3,29 @@ import React, { useEffect } from "react";
 import { Register } from "features/auth/register/Register";
 import { Login } from "features/auth/login/Login";
 import styled from "styled-components";
-import { selectIsSignIn, selectLoading } from "app/app.selectors";
+import { selectLoading } from "app/app.selectors";
 import ButtonAppBar from "components/ButtonAppBar";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { appActions } from "app/app.slice";
+import { useActions } from "common/hooks/useAppActions";
+import { authThunks } from "features/auth/auth.slice";
 
 export const App = () => {
 
   const isLoading = useAppSelector(selectLoading);
-  const isSignIn = useAppSelector(selectIsSignIn)
+  const { isInitializedApp } = useActions(authThunks)
 
 
   const dispatch = useAppDispatch();
 
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   dispatch(appActions.setIsLoading({ isLoading: false }));
-    // }, 3000);
+    setTimeout(() => {
+      dispatch(appActions.setIsLoading({ isLoading: false }));
+    }, 3000);
+    isInitializedApp({})
   }, []);
 
-  if(isSignIn) {
-    // return <Navigate to={"/login"}
-  }
 
   return (
     <>
@@ -32,8 +33,9 @@ export const App = () => {
       <AppContainer>
         {isLoading && <h1>Loader...</h1>}
         <Routes>
+          <Route path="/cards" element={<h1>Cards</h1>} />
           <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
+          <Route path="/" element={<Register/>} />
           <Route path="/*" element={<div>Error 404</div>} />
         </Routes>
       </AppContainer>
