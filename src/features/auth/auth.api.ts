@@ -6,6 +6,9 @@ export const authApi = {
     },
     login: (data: ArgLoginType) => {
         return instance.post<ProfileType>('auth/login', data)
+    },
+    me:()=>{
+        return instance.post<ProfileType>('auth/me')
     }
 
 }

@@ -52,8 +52,9 @@ import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Paper, TextFi
 import { useActions } from "common/hooks/useAppActions";
 import { authThunks } from "features/auth/auth.slice";
 import Button from "@mui/material/Button";
-import { LinkTo, TextForm } from "register/Register";
+import { LinkTo, TextForm } from "features/auth/register/Register";
 import { useNavigate } from "react-router-dom";
+import { emailValidation } from "features/auth/login/validation";
 
 
 
@@ -64,8 +65,14 @@ export const Login = () => {
   const { login } = useActions(authThunks);
   const navigate = useNavigate()
 
-  const { control, handleSubmit } = useForm({
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: {errors, isValid}
+  } = useForm({
     defaultValues: {
+      firstName:"",
       email: "",
       password: "",
       rememberMe: false
@@ -95,6 +102,7 @@ export const Login = () => {
             <Controller
               name="email"
               control={control}
+              rules={emailValidation}
               render={({ field }) =>
                 <TextField sx={{
                   width: 348,
@@ -102,6 +110,8 @@ export const Login = () => {
                 }}
                            label="Email"
                            margin="normal"
+                           error={!!errors.email}
+                           helperText={errors.email?.message}
                            {...field} />}
             />
             <Controller

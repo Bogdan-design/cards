@@ -1,12 +1,11 @@
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import React from "react";
-import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Paper, TextField } from "@mui/material";
+import { FormControl, FormGroup, Grid, Paper, TextField } from "@mui/material";
 import { useActions } from "common/hooks/useAppActions";
 import { authThunks } from "features/auth/auth.slice";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
 
 
 export const Register = () => {
@@ -24,6 +23,7 @@ export const Register = () => {
 
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    console.log(data);
     register(data)
   };
 

@@ -5,7 +5,7 @@ import {store} from "app/store";
 import {App} from "App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import { BrowserRouter, createBrowserRouter, RouterProvider } from "react-router-dom";
 import {Root} from "routes/Root";
 import {SignIn} from "routes/SignIn";
 import {SignUp} from "routes/SignUp";
@@ -17,7 +17,7 @@ import {ForgotPassword} from "routes/ForgotPassword";
 import {CheckEmail} from "routes/CheckEmail";
 import {SetNewPassword} from "routes/SetNewPassword";
 import ButtonAppBar from "components/ButtonAppBar";
-import { Login } from "login/Login";
+import { Login } from "features/auth/login/Login";
 
 const router = createBrowserRouter([
     {
@@ -82,10 +82,12 @@ const container = document.getElementById("root")!;
 const root = createRoot(container);
 
 root.render(
+  <BrowserRouter>
         <Provider store={store}>
             {/*<RouterProvider router={router}/>*/}
             <App/>
         </Provider>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
