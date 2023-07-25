@@ -1,51 +1,3 @@
-// import React from "react";
-// import { authThunks } from "features/auth/auth.slice";
-// import s from "register/styles.module.css";
-// import { useActions } from "common/hooks/useAppActions";
-// import ReactDOM from "react-dom";
-// import { useForm, SubmitHandler } from "react-hook-form";
-//
-// enum GenderEnum {
-//   female = "female",
-//   male = "male",
-//   other = "other",
-// }
-//
-// interface IFormInput {
-//   firstName: string;
-//   gender: GenderEnum;
-// }
-//
-// export const Login = () => {
-//   const { register, handleSubmit } = useForm<IFormInput>();
-//   const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
-//
-//   const { login } = useActions(authThunks);
-//
-//   const loginHandler = () => login({ email: "bogdanbw@gmail.com", password: "123456789", rememberMe: false });
-//
-//
-//   return (
-//
-//     <div className={s.container}>
-//       <h1>Login</h1>
-//       <button onClick={loginHandler}>register</button>
-//       <form onSubmit={handleSubmit(onSubmit)}>
-//         <label>First Name</label>
-//         <input {...register("firstName")} />
-//         <label>Gender Selection</label>
-//         <select {...register("gender")}>
-//           <option value="female">female</option>
-//           <option value="male">male</option>
-//           <option value="other">other</option>
-//         </select>
-//         <input type="submit" />
-//       </form>
-//     </div>
-//   );
-// };
-
-
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import React from "react";
 import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Paper, TextField } from "@mui/material";
@@ -59,13 +11,11 @@ import { useAppSelector } from "app/hooks";
 import { selectIsSignIn } from "app/app.selectors";
 
 
-
-
-
 export const Login = () => {
 
   const { login } = useActions(authThunks);
   const isSignIn=useAppSelector(selectIsSignIn)
+
 
   const navigate = useNavigate()
 
@@ -88,7 +38,7 @@ export const Login = () => {
   };
 
   if(isSignIn) {
-    return <Navigate to={"/login"} />
+    return <Navigate to={"/"} />
   }
 
   return <Paper elevation={3} sx={{

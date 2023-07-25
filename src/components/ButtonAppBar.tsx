@@ -6,8 +6,20 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { Container } from "@mui/material";
+import { useAppSelector } from "app/hooks";
+import { selectIsSignIn } from "app/app.selectors";
+import { useActions } from "common/hooks/useAppActions";
+import { authThunks } from "features/auth/auth.slice";
 
 export default function ButtonAppBar() {
+
+  const isSignIn = useAppSelector(selectIsSignIn)
+  const {logOut} = useActions(authThunks)
+
+  const logOutHandler = () =>{
+    logOut({})
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -25,10 +37,14 @@ export default function ButtonAppBar() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               CARDS
             </Typography>
-            <Button variant={"contained"}
-                    color={"secondary"}>
+            {isSignIn ? <Button variant={"contained"}
+                                color={"secondary"}>
+              Log Out
+            </Button> : <Button onClick={logOutHandler} variant={"contained"}
+                                color={"secondary"}>
               Sing In
-            </Button>
+            </Button>  }
+
           </Toolbar>
         </Container>
       </AppBar>

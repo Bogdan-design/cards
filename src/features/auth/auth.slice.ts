@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ArgLoginType, ArgRegisterType, authApi, ProfileType, RegisterResponseType } from "features/auth/auth.api";
+import {
+  ArgLoginType,
+  ArgRegisterType,
+  authApi,
+  LogOutType,
+  ProfileType,
+  RegisterResponseType
+} from "features/auth/auth.api";
 import { createAppAsyncThunk } from "common/utils/create-app-async-thunk";
 import { appActions } from "app/app.slice";
 
@@ -22,19 +29,27 @@ const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>("auth/
     });
 });
 
-const isSignIn = createAppAsyncThunk<{ isSignIn: boolean }, void>("auth/me", (_, thunkAPI) => {
+const logOut = createAppAsyncThunk<{ isSignIn: boolean }, void>("auth/login", _ => {
+  return authApi.logOut()
+    .then(res => {
+      return { isSignIn: false };
+    });
+});
+
+const isSignInApp = createAppAsyncThunk<{ isSignIn: boolean }, void>("auth/me", (_, thunkAPI) => {
   const { dispatch, rejectWithValue } = thunkAPI;
   return authApi.me()
     .then(res => {
         if (res) {
           return { isSignIn: true };
-          dispatch(appActions.isAppInitialized({ isAppInitialized: true }));
         } else {
-          return rejectWithValue('');
+          return rejectWithValue("");
         }
-
       }
     )
+    .finally(() => {
+      dispatch(appActions.isAppInitialized({ isAppInitialized: true }));
+    });
 });
 
 const initialState = {
@@ -51,7 +66,7 @@ const slice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.profile = action.payload.profile;
       })
-      .addCase(isSignIn.fulfilled, (state, action) => {
+      .addCase(isSignInApp.fulfilled, (state, action) => {
         state.isSignIn = action.payload.isSignIn;
       });
   }
@@ -59,4 +74,4 @@ const slice = createSlice({
 
 export const authReducer = slice.reducer;
 export const authActions = slice.actions;
-export const authThunks = { register, login, isSignIn };
+export const authThunks = { register, login, isSignInApp,logOut };
