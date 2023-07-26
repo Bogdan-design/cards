@@ -22,18 +22,20 @@ const register = createAppAsyncThunk<RegisterResponseType, ArgRegisterType>("aut
     });
 });
 
-const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>("auth/login", arg => {
+const login = createAppAsyncThunk<{ isSignIn: boolean }, ArgLoginType>("auth/login", arg => {
   return authApi.login(arg)
     .then(res => {
-      return { profile: res.data };
-    });
+      return { isSignIn: true };
+    })
+
 });
 
-const logOut = createAppAsyncThunk<{ isSignIn: boolean }, void>("auth/login", _ => {
+const logOut = createAppAsyncThunk<{ isSignIn: boolean }, void>("auth/logout", _ => {
   return authApi.logOut()
     .then(res => {
       return { isSignIn: false };
     });
+
 });
 
 const isSignInApp = createAppAsyncThunk<{ isSignIn: boolean }, void>("auth/me", (_, thunkAPI) => {
@@ -43,7 +45,7 @@ const isSignInApp = createAppAsyncThunk<{ isSignIn: boolean }, void>("auth/me", 
         if (res) {
           return { isSignIn: true };
         } else {
-          return rejectWithValue("");
+          return rejectWithValue("Please Sign in or Sign up");
         }
       }
     )
@@ -64,11 +66,14 @@ const slice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(login.fulfilled, (state, action) => {
-        state.profile = action.payload.profile;
+        state.isSignIn = action.payload.isSignIn
       })
       .addCase(isSignInApp.fulfilled, (state, action) => {
         state.isSignIn = action.payload.isSignIn;
-      });
+      })
+      .addCase(logOut.fulfilled,(state,action)=>{
+        state.isSignIn=action.payload.isSignIn
+      })
   }
 });
 

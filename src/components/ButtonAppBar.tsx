@@ -37,10 +37,10 @@ export default function ButtonAppBar() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               CARDS
             </Typography>
-            {isSignIn ? <Button variant={"contained"}
+            {isSignIn ? <Button onClick={logOutHandler} variant={"contained"}
                                 color={"secondary"}>
               Log Out
-            </Button> : <Button onClick={logOutHandler} variant={"contained"}
+            </Button> : <Button  variant={"contained"}
                                 color={"secondary"}>
               Sing In
             </Button>  }

@@ -16,6 +16,9 @@ export const App = () => {
   const isInitializedApp = useAppSelector(selectIsAppInitialized);
   const isSignIn = useAppSelector(selectIsSignIn);
 
+  console.log(isSignIn);
+  console.log(isInitializedApp);
+
 
   const { isSignInApp } = useActions(authThunks);
   const navigate = useNavigate()
@@ -28,7 +31,6 @@ export const App = () => {
   }, []);
 
   if (!isInitializedApp) {
-
     return <div style={{ position: "fixed", width: "100%", top: "45%", textAlign: "center" }}>
       <CircularProgress color="secondary" />
     </div>;
